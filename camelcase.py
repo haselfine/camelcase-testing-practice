@@ -1,3 +1,5 @@
+import re
+
 # This program uses the .title(), .split(), and .join() functions to convert a sentence into camel case.
 
 def display_instructions():
@@ -10,13 +12,19 @@ def display_banner():
     print(f'\n {stars} \n {msg} \n {stars}\n')
 
 def camel_case(sentence):
-    cap_sentence = sentence.title()
-    split_sentence = cap_sentence.split(" ")
+    try:
+        no_newline = re.sub('\n', ' ', sentence) #replace newlines with a space
+        no_special = re.sub('[^a-zA-Z1-9 ]', '', no_newline) #remove characters that aren't alphanumeric
+        split_sentence = no_special.strip().split(" ")
+        for s in range(len(split_sentence)):
+            split_sentence[s] = split_sentence[s].title() #uppercase first letter, lowercase the rest for each word
+        split_sentence[0] = split_sentence[0].lower()   # First word must be all lowercase
+        join_sentence = "".join(split_sentence)
 
-    split_sentence[0] = split_sentence[0].lower()   # First word must be lowercase
-
-    join_sentence = "".join(split_sentence)
-    return join_sentence
+        return join_sentence
+    except (TypeError):
+        print('Sentences must include only letters, no digits.')
+        return '' #return empty string instead of None
 
 def main():
     display_banner()
