@@ -16,9 +16,12 @@ class ClassList:
 
         self.class_list = []
         self.max_students = max_students
-
+        if self.max_students <= 0:
+            raise StudentError('Maximum class size must be at least 1.')
+        
         # TODO raise an exception - StudentError - if max_students is zero or negative. 
         # Write test to confirm.
+        
 
 
     def add_student(self, student):
