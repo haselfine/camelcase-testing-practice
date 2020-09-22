@@ -31,6 +31,14 @@ class TestStudentLists(TestCase):
         with self.assertRaises(StudentError):
             test_class.add_student('Test Student')
 
+    def test_max_student_is_zero(self):
+        
+        with self.assertRaises(StudentError):
+            test_class = ClassList(0)
+
+        with self.assertRaises(StudentError):
+            test_class = ClassList(-1)
+
 
     ## TODO write a test that adds and removes a student, 
     # and asserts the student is removed. Use assertNotIn
